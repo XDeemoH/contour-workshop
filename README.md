@@ -1,6 +1,52 @@
 # 等高线工坊
 
+![等高线工坊生成的横幅画面](docs/images/hero.webp)
+
 本地运行的程序化等高线画面编辑器。画面、参数和导出都在浏览器本地处理。当前版本 `v1.0.0`；离线单文件与高分辨率示例图的打包 ZIP 见 Releases 页面。
+
+## 画作
+
+下面每一幅都由工坊生成：换种子、配色、发光方向或雕刻几个山峰，就得到一片新的地形。
+
+<table>
+  <tr>
+    <td><img src="docs/images/art-amber.webp" alt="墨黑底，琥珀色扫光"></td>
+    <td><img src="docs/images/art-paper.webp" alt="纸白底，赭色轮廓光"></td>
+    <td><img src="docs/images/art-teal.webp" alt="深青底，青绿色发光"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>琥珀扫光 · 种子 451，两处雕刻</sub></td>
+    <td align="center"><sub>纸白 · 种子 2024</sub></td>
+    <td align="center"><sub>青绿 · 种子 83117</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/art-ink.webp" alt="米色纸面上的黑色实线等高线"></td>
+    <td><img src="docs/images/art-rust.webp" alt="深褐底，锈红色发光，带山峰与火山口雕刻"></td>
+    <td><img src="docs/images/art-quiet.webp" alt="低对比度的安静背景"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>墨线 · 实线、无发光</sub></td>
+    <td align="center"><sub>锈红 · 山峰中央挖出火山口</sub></td>
+    <td align="center"><sub>安静背景 · 适合放在内容后面</sub></td>
+  </tr>
+</table>
+
+## 界面
+
+![桌面界面：墨黑底与琥珀扫光](docs/images/ui-dark.webp)
+
+<table>
+  <tr>
+    <td width="40%"><img src="docs/images/ui-sculpt.webp" alt="地形雕刻：在画面上放置山峰和洼地控制点"></td>
+    <td width="40%"><img src="docs/images/ui-light.webp" alt="纸白画布"></td>
+    <td width="20%"><img src="docs/images/ui-mobile.webp" alt="手机宽度下的界面"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>地形雕刻：橙点是山峰，青点是洼地</sub></td>
+    <td align="center"><sub>纸白画布</sub></td>
+    <td align="center"><sub>手机宽度</sub></td>
+  </tr>
+</table>
 
 ## 直接使用
 

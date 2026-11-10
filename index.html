@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>等高线工坊</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 16C4 2 28 2 28 16S4 30 4 16M9 16c0-8 14-8 14 0s-14 8-14 0' fill='none' stroke='%23d89140' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="等高线工坊首页"><span class="brand-mark" aria-hidden="true">◎</span> 等高线工坊 <span>/ FIELD STUDIES</span></a>
+    <span class="edition">NO. 001 <span>—</span> TOPOGRAPHIC ART</span>
+  </header>
+  <main class="workspace">
+    <aside class="controls" aria-label="背景参数">
+      <div class="intro"><p class="eyebrow">CONTOUR WORKSHOP</p><h1>等高线工坊</h1><p class="intro-copy">让地形缓慢生长，<br>把一刻的起伏留成画面。</p></div>
+      <section class="control-section">
+        <h2><span>01</span> 画面</h2>
+        <div class="segmented" aria-label="画面用途">
+          <button type="button" id="preset-art" aria-pressed="true">艺术线稿</button>
+          <button type="button" id="preset-quiet" aria-pressed="false">安静背景</button>
+        </div>
+        <div class="palette-row"><span>底色</span><div class="theme-switch" aria-label="底色">
+          <button type="button" id="theme-dark" class="swatch dark" aria-label="墨黑底色" aria-pressed="true"></button>
+          <button type="button" id="theme-light" class="swatch light" aria-label="纸白底色" aria-pressed="false"></button>
+        </div><span id="theme-name" class="quiet">墨黑</span></div>
+        <div class="seed-row"><label for="seed">地形种子</label><input id="seed" type="number" min="0" max="999999" value="721"><button id="shuffle" type="button" title="更换种子，生成新的地形">换一幅 <span aria-hidden="true">↗</span></button></div>
+      </section>
+      <section class="control-section">
+        <h2><span>02</span> 地形</h2>
+        <label class="slider-label" for="scale">地形尺度 <output id="scale-out">3.7</output></label><input id="scale" type="range" min="1" max="7" step="0.1" value="3.7">
+        <label class="slider-label" for="bands">等高线密度 <output id="bands-out">48</output></label><input id="bands" type="range" min="10" max="80" step="1" value="48">
+        <label class="slider-label" for="warp">弯曲程度 <output id="warp-out">1.35</output></label><input id="warp" type="range" min="0" max="3" step="0.05" value="1.35">
+        <label class="slider-label" for="octaves">地形细节 <output id="octaves-out">3</output></label><input id="octaves" type="range" min="1" max="5" step="1" value="3">
+        <div class="mode-row"><button id="source-procedural" type="button" aria-pressed="true">程序地形</button><button id="import-photo" type="button">导入照片 ↗</button><input id="photo-file" type="file" accept="image/png,image/jpeg,image/webp" hidden></div>
+        <div id="photo-tools" hidden><label class="slider-label" for="photo-contrast">照片明暗对比 <output id="photo-contrast-out">1.00</output></label><input id="photo-contrast" type="range" min="0.3" max="3" step="0.05" value="1"><label class="check-label"><input id="photo-invert" type="checkbox"> 反转明暗</label></div>
+        <p class="control-hint" id="terrain-source-hint">照片按中心裁成 3:4，再按明暗生成轮廓；它不是实际高程测量。</p>
+      </section>
+      <section class="control-section">
+        <h2><span>03</span> 地形雕刻</h2>
+        <div class="mode-row"><button type="button" id="edit-hill">添加山峰</button><button type="button" id="edit-valley">添加洼地</button><button type="button" id="edit-none" aria-pressed="true">完成</button></div>
+        <label class="slider-label" for="brush-radius">影响范围 <output id="brush-radius-out">15%</output></label><input id="brush-radius" type="range" min="0.03" max="0.4" step="0.01" value="0.15">
+        <label class="slider-label" for="brush-strength">地形起伏 <output id="brush-strength-out">0.25</output></label><input id="brush-strength" type="range" min="0.03" max="0.55" step="0.01" value="0.25">
+        <div class="mode-row"><button type="button" id="undo-control">撤销一点</button><button type="button" id="clear-controls">清空雕刻</button></div>
+        <p class="control-hint">点击画面放置，拖动圆点调整位置；最多 12 点。</p>
+      </section>
+      <section class="control-section">
+        <h2><span>04</span> 线条</h2>
+        <label class="slider-label" for="line-width">线宽 <output id="line-width-out">0.85 px</output></label><input id="line-width" type="range" min="0.35" max="2" step="0.05" value="0.85">
+        <label class="slider-label" for="alpha">线条显隐 <output id="alpha-out">64%</output></label><input id="alpha" type="range" min="0.02" max="1" step="0.01" value="0.64">
+        <label class="slider-label" for="edge">边缘渐隐 <output id="edge-out">10%</output></label><input id="edge" type="range" min="0.02" max="0.3" step="0.01" value="0.1">
+        <div class="inline-settings"><label class="color-label" for="line-color"><input id="line-color" type="color" value="#b8bdbb"> 线色</label><label class="check-label"><input id="dashed" type="checkbox" checked> 穿插虚线</label></div>
+        <details class="advanced"><summary>精细线条与渐隐</summary>
+          <label class="slider-label" for="softness">线条柔度 <output id="softness-out">0.8</output></label><input id="softness" type="range" min="0.1" max="2" step="0.05" value="0.8">
+          <label class="slider-label" for="fade-inner">中心保留范围 <output id="fade-inner-out">0.48</output></label><input id="fade-inner" type="range" min="0.05" max="0.7" step="0.01" value="0.48">
+          <label class="slider-label" for="fade-outer">外圈淡出范围 <output id="fade-outer-out">0.82</output></label><input id="fade-outer" type="range" min="0.3" max="1.2" step="0.01" value="0.82">
+        </details>
+      </section>
+      <section class="control-section">
+        <h2><span>05</span> 等高线发光</h2>
+        <label class="slider-label" for="speed">形变速度 <output id="speed-out">0.018</output></label><input id="speed" type="range" min="0" max="0.08" step="0.001" value="0.018">
+        <div class="inline-settings"><label class="check-label"><input id="light-enabled" type="checkbox"> 启用轮廓发光</label><label class="color-label" for="light-color"><input id="light-color" type="color" value="#b9701a"> 光色</label></div>
+        <label class="slider-label" for="light-angle">扫光角度 <output id="light-angle-out">30°</output></label><input id="light-angle" type="range" min="0" max="359" step="1" value="30">
+        <label class="slider-label" for="light-intensity">发光亮度 <output id="light-intensity-out">0.70</output></label><input id="light-intensity" type="range" min="0" max="1.5" step="0.05" value="0.7">
+        <label class="slider-label" for="light-width">扫光范围 <output id="light-width-out">18%</output></label><input id="light-width" type="range" min="0.03" max="0.45" step="0.01" value="0.18">
+        <label class="slider-label" for="light-speed">扫光速度 <output id="light-speed-out">0.08</output></label><input id="light-speed" type="range" min="0" max="0.6" step="0.01" value="0.08">
+        <p class="control-hint">光晕附着在等高线上；扫光经过时，只提亮经过的线段。0° 从左向右，90° 从上向下。</p>
+      </section>
+      <div class="utility only-reset"><button type="button" id="reset">恢复初始</button></div>
+    </aside>
+    <section class="art-workspace" aria-label="背景预览与导出">
+      <div class="stage-header"><div><span class="status-dot" aria-hidden="true"></span><span id="motion-status">连续变形</span></div><span id="seed-caption">SEED 000721</span></div>
+      <div class="art-mount" id="art-mount"><div class="art-frame" id="art-frame"><canvas id="art" role="img" aria-label="可调动态等高线艺术背景"></canvas><svg id="edit-overlay" viewBox="0 0 1000 1333" preserveAspectRatio="none" aria-label="地形编辑区"></svg></div></div>
+      <div class="playback">
+        <button type="button" id="play" aria-label="暂停动态"><span id="play-icon" aria-hidden="true">Ⅱ</span></button>
+        <label for="timeline" class="sr-only">时间位置（秒）</label><input type="range" id="timeline" min="0" max="180" step="0.1" value="0">
+        <output id="time-label">00:00.0</output>
+      </div>
+      <div class="export-bar">
+        <div class="export-info"><label for="export-size">静态导出</label><select id="export-size" aria-label="导出尺寸"><option value="3072x4096" selected>3072 × 4096 · 高清</option><option value="1536x2048">1536 × 2048 · 标准</option></select><span class="quiet">3:4 · PNG 原生渲染 / SVG 矢量</span></div>
+        <div class="export-actions"><label class="check-label"><input id="transparent" type="checkbox"> 透明底</label><button id="export-svg" type="button" class="secondary" title="CPU 矢量近似，便于编辑轮廓；与动态画面略有差异">SVG</button><button id="export-png" type="button" class="primary">导出 PNG <span aria-hidden="true">↓</span></button></div>
+      </div>
+      <div class="bottom-line"><p id="message" role="status" aria-live="polite">同一个种子，留住同一片地形。</p><div><button type="button" id="save-settings">保存参数</button><button type="button" id="load-settings">读取工程</button><input type="file" id="settings-file" accept=".json,.png,.svg,application/json,image/png,image/svg+xml" hidden></div></div>
+    </section>
+  </main>
+  <footer class="page-footer"><span>PROCEDURAL TERRAIN / ORIGINAL FIELD</span><span>线条连续变形 <i>·</i> 所有文件在本机处理</span></footer>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
